@@ -3,7 +3,7 @@ import lightning as L
 
 class WordComponent(L.LightningWork):
     def __init__(self, word):
-        super().__init__(cloud_compute=L.CloudCompute("gpu-fast-multi"))
+        super().__init__(cloud_compute=L.CloudCompute())
         self.word = word
 
     def run(self):
