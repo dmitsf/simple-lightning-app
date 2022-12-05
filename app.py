@@ -7,18 +7,14 @@ class WordComponent(L.LightningWork):
         self.word = word
 
     def run(self):
-        drive = L.storage.Drive("lit://drive111", component_name="word")
-        print("=======>", drive.list("."))
+        drive = L.storage.Drive("lit://my_drive", component_name="word", allow_duplicates=True)
+        print("Before saving the file to the drive:", drive.list("."))
 
         with open("a.txt", "w") as f:
-            f.write("Hello World !")
+            f.write("Hello World from the file!")
 
         drive.put("a.txt")
-        print(drive.list("."))
-        print(drive.get("a.txt"))  # Get the file into the current worker
-
-        #drive.delete("a.txt")
-        #drive.list(".")
+        print("After saving the file to the drive:", drive.list("."))
 
         print(self.word)
 
@@ -27,12 +23,13 @@ class LitApp(L.LightningFlow):
     def __init__(self) -> None:
         super().__init__()
         self.hello = WordComponent("hello")
-#        self.world = WordComponent("world")
+        # The second component can be enabled:
+        # self.world = WordComponent("world")
 
     def run(self):
         print("This is a simple Lightning app, make a better app!")
         self.hello.run()
-#        self.world.run()
+        # self.world.run()
 
 
 app = L.LightningApp(LitApp())
