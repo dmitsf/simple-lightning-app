@@ -24,12 +24,12 @@ class LitApp(L.LightningFlow):
         super().__init__()
         self.hello = WordComponent("hello")
         # The second component can be enabled:
-        # self.world = WordComponent("world")
+        self.world = WordComponent("world")
 
     def run(self):
         print("This is a simple Lightning app, make a better app!")
         self.hello.run()
-        # self.world.run()
+        self.world.run()
 
 
 app = L.LightningApp(LitApp())
